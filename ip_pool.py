@@ -15,7 +15,7 @@ class IPPool(object):
             self.ip_dict[ip] = 0
         self.req_per_proxy = req_per_proxy
 
-    def get_a_ip(self):
+    def get_an_ip(self):
         for ip in self.ip_dict.keys(): # 先返回已经有次数且在设定范围内的
             if self.ip_dict[ip] in range(1, self.req_per_proxy):
                 self.ip_dict[ip] += 1
@@ -33,7 +33,7 @@ class IPPool(object):
         for ip in self.ip_dict.keys(): # 所有ip次数满，清零后返回
             self.ip_dict[ip] = 0
 
-        return self.get_a_ip() 
+        return self.get_an_ip() 
 
     def _get_ips_from_file(self, file_path):
         ips = []
@@ -55,5 +55,5 @@ class IPPool(object):
 if __name__ == '__main__':
     pool1 = IPPool(file_path=PROXY_FILE_PATH, req_per_proxy=1000)
     for _ in range(1000):
-        print 'get a valid ip: {}'.format(pool1.get_a_ip())
+        print 'get a valid ip: {}'.format(pool1.get_an_ip())
 
